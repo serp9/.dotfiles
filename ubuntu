@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
+
 if [[ -z $STOW_FOLDERS ]]; then
-    STOW_FOLDERS="bin,i3,netflix,nvim,personal,tmux,uwuntu,xkb,zsh"
+    # Use find to list non-hidden subdirectories in the current working directory
+    STOW_FOLDERS=$(find . -maxdepth 1 -type d -not -name ".*" -printf "%f," | sed 's/,$//')
 fi
 
 if [[ -z $DOTFILES ]]; then
@@ -8,3 +10,4 @@ if [[ -z $DOTFILES ]]; then
 fi
 
 STOW_FOLDERS=$STOW_FOLDERS DOTFILES=$DOTFILES $DOTFILES/install
+
