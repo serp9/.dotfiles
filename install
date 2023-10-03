@@ -6,8 +6,6 @@ for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
 do
     echo "stow $folder"
     stow -D $folder
-    stow --adopt $folder
+    stow $folder
 done
 popd
-
-git reset --hard
