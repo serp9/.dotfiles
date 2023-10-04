@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+stow -D */
+stow --adopt */
+stow -D */
+git reset --hard
+stow */
