@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+
+session=$(find ~ -mindepth 1 -maxdepth 1 -type d | fzf)
+session_name=$(basename "$session" | tr . _)
+
+if ! tmux has-session -t "$session_name"; then
+	tmux new-session -s "$session_name" -c "$session" -d
+fi
+
+if [ -n "$TMUX" ]; then
+    echo "You are in a tmux session."
+	tmux switch-client -t "$session_name"
+else
+    echo "You are not in a tmux session."
+	tmux attach-session -t "$session_name"
+fi
+
+
